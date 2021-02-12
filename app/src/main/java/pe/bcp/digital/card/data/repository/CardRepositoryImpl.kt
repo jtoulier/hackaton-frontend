@@ -14,9 +14,7 @@ class CardRepositoryImpl(private val httpClient: HttpClient, private val session
 
     override suspend fun getSummary(): Result<Summary>{
         return try {
-            val response = httpClient.get<Summary>(path = HttpConstants.SUMMARY){
-
-//            val response = httpClient.get<Summary>(path = "S${HttpConstants.SUMMARY}${session.user!!.document}"){
+            val response = httpClient.get<Summary>(path = "S${HttpConstants.SUMMARY}${session.user!!.document}"){
             }
             Result.Success(response)
         }catch (t: Throwable){

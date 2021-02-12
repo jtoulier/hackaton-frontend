@@ -38,10 +38,10 @@ class CardAdapter : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
         fun bind(card: Card){
             current = card
-            binding.tvCardNumber.text = card.cardNumber
-            binding.tvAuthorizedAmount.text = card.authorizedAmount
-            binding.tvAvailableAmount.text = card.availableAmount
-            binding.tvExpirationDate.text = card.expirationDate
+            binding.tvCardNumber.text = "Nro. de Tarjeta Disponible: ${card.cardNumber}"
+            binding.tvAuthorizedAmount.text = "Tu linea es de S/.${card.authorizedAmount}"
+            binding.tvAvailableAmount.text = "Has usado: ${card.availableAmount}"
+            binding.tvExpirationDate.text = "Fecha de Vencimiento es: ${card.expirationDate}"
         }
     }
 

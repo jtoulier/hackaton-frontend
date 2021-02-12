@@ -1,5 +1,6 @@
 package pe.bcp.digital.card.data.repository
 
+import android.util.Log
 import pe.bcp.digital.card.util.Result
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -15,13 +16,15 @@ class UserRepositoryImpl(private val client: HttpClient, private val userSession
     override suspend fun login(document: String, pwd: String): Result<User> {
          return try {
             val response = client.post<LoginResponse>(path = HttpConstants.LOGIN) {
-//                body = LoginRequest(document, pwd)
+                body = LoginRequest(document, pwd)
+
             }
              val user = response.toUser()
              userSession.user = user
             Result.Success(user)
         }catch (t: Throwable){
-            Result.Error(Exception("Error"))
+             Log.d("OkHttp","${t.stackTrace}")
+             Result.Error(Exception("Error"))
         }
     }
 

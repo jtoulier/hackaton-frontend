@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel.summary.observe(viewLifecycleOwner){
-            binding.tvCredit.text = it.availableAmount.toString()
+            binding.tvCredit.text = "Tu linea de saldo es de : S/." + it.availableAmount.toString()
             (binding.rcvDigitalCard.adapter as CardAdapter).items = it.digitalCards.toMutableList()
         }
 
