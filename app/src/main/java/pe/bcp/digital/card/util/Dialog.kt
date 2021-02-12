@@ -5,11 +5,13 @@ import androidx.appcompat.app.AlertDialog
 
 object Dialog{
 
-    fun showDialog(context: Context, message: String){
+    fun showDialog(context: Context, message: String, onClick: (() -> Unit)? = null){
         val builder = AlertDialog.Builder(context)
         builder.setTitle("App")
         builder.setMessage(message)
-        builder.setPositiveButton("Ok"){ _,_ -> }
+        builder.setPositiveButton("Ok"){ _,_ ->
+            onClick?.invoke()
+        }
         builder.show()
     }
 

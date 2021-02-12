@@ -17,13 +17,12 @@ class UserRepositoryImpl(private val client: HttpClient, private val userSession
          return try {
             val response = client.post<LoginResponse>(path = HttpConstants.LOGIN) {
                 body = LoginRequest(document, pwd)
-
             }
              val user = response.toUser()
              userSession.user = user
             Result.Success(user)
         }catch (t: Throwable){
-             Log.d("OkHttp","${t.stackTrace}")
+             Log.d("OkHttp","$t.stackTraceToString()")
              Result.Error(Exception("Error"))
         }
     }

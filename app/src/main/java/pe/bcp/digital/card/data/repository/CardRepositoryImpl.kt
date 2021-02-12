@@ -26,7 +26,7 @@ class CardRepositoryImpl(private val httpClient: HttpClient, private val session
     override suspend fun addCard(amount: Int, expirationDate: String): Result<Unit> {
         return try {
             val response = httpClient.get<HttpResponse>(path = HttpConstants.REGISTER_CARD){
-                body = RegisterCardRequest(session.user!!.document, amount, expirationDate)
+//                body = RegisterCardRequest(session.user!!.document, amount, expirationDate)
             }
 
             if(response.status.value == 201) Result.Success(Unit) else Result.Error(Exception("Error"))

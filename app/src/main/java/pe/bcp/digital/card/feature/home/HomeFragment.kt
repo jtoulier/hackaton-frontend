@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import pe.bcp.digital.card.MainShareViewModel
 import pe.bcp.digital.card.databinding.HomeFragmentBinding
 import pe.bcp.digital.card.feature.home.adapter.CardAdapter
 
 class HomeFragment : Fragment() {
 
+    private val sharedVM: MainShareViewModel by activityViewModels()
     private val viewModel by viewModel<HomeViewModel>()
     private var _binding : HomeFragmentBinding? = null
     private val binding get() = _binding!!
@@ -44,6 +47,12 @@ class HomeFragment : Fragment() {
 
         viewModel.progress.observe(viewLifecycleOwner){
             binding.progressBar.visibility = if(it) View.VISIBLE else View.GONE
+        }
+
+        sharedVM.notifyCard.observe(viewLifecycleOwner){
+            it.getContentIfNotHandled()?.let { _ ->
+                viewModel.getSummary()
+            }
         }
 
 

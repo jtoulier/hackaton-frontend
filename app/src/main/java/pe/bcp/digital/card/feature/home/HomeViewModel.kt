@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pe.bcp.digital.card.data.model.Summary
 import pe.bcp.digital.card.data.repository.CardRepository
-import pe.bcp.digital.card.util.Event
 import pe.bcp.digital.card.util.Result
 
 class HomeViewModel(private val cardRepository: CardRepository) : ViewModel() {
