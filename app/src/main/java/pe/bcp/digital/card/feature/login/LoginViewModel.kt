@@ -17,6 +17,10 @@ class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
     val navigateToHome : LiveData<Event<String>>
         get() = _navigateToHome
 
+    private val _progress = MutableLiveData<Event<Boolean>>()
+    val progress : LiveData<Event<Boolean>>
+        get() = _progress
+
     private val _message = MutableLiveData<Event<String>>()
     val message : LiveData<Event<String>>
         get() = _message
@@ -24,13 +28,15 @@ class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     fun login(document: String, pwd: String) {
         viewModelScope.launch {
+            _progress.value = Event(true)
             val result = withContext(Dispatchers.IO){
                 userRepository.login(document, pwd)
             }
+            _progress.value = Event(false)
 
             when(result){
                 is Result.Success -> { _navigateToHome.value = Event("nav")}
-                is Result.Error -> { _message.value = Event("message")}
+                is Result.Error -> { _message.value = Event("Usuario Incorrecto")}
             }
 
         }

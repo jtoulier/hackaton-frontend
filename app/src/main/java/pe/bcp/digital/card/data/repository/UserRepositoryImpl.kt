@@ -15,7 +15,7 @@ class UserRepositoryImpl(private val client: HttpClient, private val userSession
     override suspend fun login(document: String, pwd: String): Result<User> {
          return try {
             val response = client.post<LoginResponse>(path = HttpConstants.LOGIN) {
-                body = LoginRequest(document, pwd)
+//                body = LoginRequest(document, pwd)
             }
              val user = response.toUser()
              userSession.user = user

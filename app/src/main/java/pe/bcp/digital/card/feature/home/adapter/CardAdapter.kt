@@ -1,33 +1,31 @@
 package pe.bcp.digital.card.feature.home.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import pe.bcp.digital.card.R
 import pe.bcp.digital.card.data.model.Card
-import pe.bcp.digital.card.data.model.User
 import pe.bcp.digital.card.databinding.ItemCardBinding
 
 
-class CardAdapter(private val recycle : List<Card>) :
-        RecyclerView.Adapter<CardAdapter.ViewHolderDatos>() {
+class CardAdapter : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
     var onItemClick: ((Int) -> Unit)? = null
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderDatos
-            = ViewHolderDatos(ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
-    override fun onBindViewHolder(holder: ViewHolderDatos, position: Int) {
-        val dataRecyclerView = recycle[position]
-        dataRecyclerView
-
+    var items: MutableList<Card> = mutableListOf()
+    set(value) {
+        field = value
+        notifyDataSetChanged()
     }
 
-    override fun getItemCount() = recycle.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder
+            = CardViewHolder(ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    inner class ViewHolderDatos(private val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root){
+    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+        holder.bind(items[position])
+    }
+
+    override fun getItemCount() = items.size
+
+    inner class CardViewHolder(private val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root){
         private var current: Card? = null
 
         init {
@@ -41,9 +39,9 @@ class CardAdapter(private val recycle : List<Card>) :
         fun bind(card: Card){
             current = card
             binding.tvCardNumber.text = card.cardNumber
-            binding.tvCardNumber.text = card.authorizedAmount
-            binding.tvCardNumber.text = card.availableAmount
-            binding.tvCardNumber.text = card.expirationDate
+            binding.tvAuthorizedAmount.text = card.authorizedAmount
+            binding.tvAvailableAmount.text = card.availableAmount
+            binding.tvExpirationDate.text = card.expirationDate
         }
     }
 

@@ -4,4 +4,5 @@
     <string name="has_usado_soles_s_0_00">Has usado Soles: S/.0.00</string>
     <string name="de_s_0_00">De S/.0.00</string>
     <string name="_0000000000000000">0000000000000000</string>
+    <string name="login_loading">Cargando</string>
 </resources>

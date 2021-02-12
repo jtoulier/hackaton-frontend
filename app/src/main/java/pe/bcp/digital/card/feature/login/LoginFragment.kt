@@ -1,24 +1,31 @@
 package pe.bcp.digital.card.feature.login
 
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import pe.bcp.digital.card.databinding.LoginFragmentBinding
+import com.afollestad.materialdialogs.MaterialDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pe.bcp.digital.card.R
+import pe.bcp.digital.card.databinding.LoginFragmentBinding
+import pe.bcp.digital.card.util.Dialog
 
 
 class LoginFragment : Fragment() {
 
+    private var dialog: MaterialDialog? = null
     private val viewModel by viewModel<LoginViewModel>()
     private var _binding :LoginFragmentBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = LoginFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -44,6 +51,34 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
+
+        viewModel.progress.observe(viewLifecycleOwner){
+            it.getContentIfNotHandled()?.let { flag ->
+                if(flag) showProgressDialog() else hideProgressDialog()
+            }
+        }
+
+        viewModel.message.observe(viewLifecycleOwner){
+            it.getContentIfNotHandled()?.let { message ->
+                showMessage(message)
+            }
+        }
+    }
+
+    fun showMessage(message: String){
+        Dialog.showDialog(requireContext(), message)
+    }
+
+    fun showProgressDialog(){
+        dialog = MaterialDialog.Builder(requireContext())
+            .content(R.string.login_loading)
+            .progress(true, 0)
+            .cancelable(false)
+            .show()
+    }
+
+    fun hideProgressDialog(){
+        dialog?.hide()
     }
 
 }

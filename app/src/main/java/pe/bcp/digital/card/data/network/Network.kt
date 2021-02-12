@@ -13,9 +13,9 @@ object Network{
 
     val client = HttpClient(OkHttp) {
         defaultRequest {
-            host = "35.192.80.171"
+            host = "api.mocki.io/v1"
             url {
-                protocol = URLProtocol.HTTP
+                protocol = URLProtocol.HTTPS
             }
         }
 
