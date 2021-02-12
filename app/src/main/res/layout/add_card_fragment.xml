@@ -42,7 +42,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:text="Tu línea de crédito es 100000" />
+        android:text="Tu línea de crédito es S/.100000"
+        android:textSize="20dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilCredit"

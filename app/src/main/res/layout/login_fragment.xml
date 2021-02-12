@@ -17,14 +17,13 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        tools:src="@tools:sample/avatars" />
+        android:src="@drawable/virtualbank" />
 
     <TextView
         android:id="@+id/tvCredit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Digital Card"
+        android:text="Bienvenido"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +60,8 @@
             android:id="@+id/etDocument"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:counterMaxLength="8"
+            android:inputType="number"
             android:hint="DNI" />
 
     </com.google.android.material.textfield.TextInputLayout>
