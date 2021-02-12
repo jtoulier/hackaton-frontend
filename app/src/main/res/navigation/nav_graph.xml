@@ -18,7 +18,16 @@
         android:id="@+id/homeFragment"
         android:name="pe.bcp.digital.card.feature.home.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_addCardFragment"
+            app:destination="@id/addCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCardFragment"
+        android:name="pe.bcp.digital.card.feature.addcard.AddCardFragment"
+        android:label="add_card_fragment"
+        tools:layout="@layout/add_card_fragment" />
 
 
 </navigation>

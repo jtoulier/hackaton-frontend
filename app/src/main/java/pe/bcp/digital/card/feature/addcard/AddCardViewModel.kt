@@ -1,4 +1,4 @@
-package pe.bcp.digital.card.feature.home
+package pe.bcp.digital.card.feature.addcard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,18 +8,13 @@ import kotlinx.coroutines.withContext
 import pe.bcp.digital.card.data.repository.CardRepository
 import pe.bcp.digital.card.util.Result
 
-class HomeViewModel(private val cardRepository: CardRepository) : ViewModel() {
+class AddCardViewModel(private var cardRepository: CardRepository) : ViewModel() {
 
-    init {
-        getSummary()
-    }
-
-    fun getSummary() {
+    fun registerCard(amount: Int, expirationDate: String){
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO){
-                cardRepository.getSummary()
+                cardRepository.addCard(amount, expirationDate)
             }
-
             when(result){
                 is Result.Success -> { }
                 is Result.Error -> { }
@@ -27,5 +22,4 @@ class HomeViewModel(private val cardRepository: CardRepository) : ViewModel() {
 
         }
     }
-
 }
