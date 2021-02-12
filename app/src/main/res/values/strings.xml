@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DigitalCard</string>
+    <string name="vence_el_01_01_01">Vence el 01-01-01</string>
+    <string name="has_usado_soles_s_0_00">Has usado Soles: S/.0.00</string>
+    <string name="de_s_0_00">De S/.0.00</string>
+    <string name="_0000000000000000">0000000000000000</string>
 </resources>
