@@ -5,6 +5,6 @@ import pe.bcp.digital.card.util.Result
 
 interface UserRepository {
 
-    suspend fun login(user: String, pwd: String): Result<User>
+    suspend fun login(document: String, pwd: String): Result<User>
 
 }

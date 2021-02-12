@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import pe.bcp.digital.card.databinding.LoginFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import pe.bcp.digital.card.R
 
 
 class LoginFragment : Fragment() {
@@ -25,7 +27,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding){
             btnLogin.setOnClickListener{
-                viewModel.test()
+                viewModel.login(etDocument.text.toString(), etPwd.text.toString())
             }
         }
     }
@@ -39,7 +41,7 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.navigateToHome.observe(viewLifecycleOwner){
             it.getContentIfNotHandled()?.let { _ ->
-                Log.d("VIEWMODEL", "hello world ${viewModel.toString()}" )
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
     }

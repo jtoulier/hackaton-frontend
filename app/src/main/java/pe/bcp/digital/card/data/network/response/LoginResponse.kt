@@ -4,7 +4,14 @@ import com.google.gson.annotations.SerializedName
 import pe.bcp.digital.card.data.model.User
 
 data class LoginResponse(
-    @SerializedName("code") val code : String,
-    @SerializedName("token") val token : String,
-    @SerializedName("user") val user : User
-)
+    @SerializedName("dni") val dni : String,
+    @SerializedName("firstSurname") val firstSurname : String,
+    @SerializedName("secondSurname") val secondSurname : String,
+    @SerializedName("givenName") val givenName : String,
+){
+    fun toUser(): User {
+        return User(firstSurname, secondSurname, givenName, dni)
+    }
+
+}
+
