@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pe.bcp.digital.card.MainShareViewModel
+import pe.bcp.digital.card.R
 import pe.bcp.digital.card.databinding.HomeFragmentBinding
 import pe.bcp.digital.card.feature.home.adapter.CardAdapter
 
@@ -29,6 +31,12 @@ class HomeFragment : Fragment() {
         with(binding.rcvDigitalCard){
             layoutManager = LinearLayoutManager(context)
             adapter = CardAdapter()
+        }
+
+        with(binding){
+            btnAdd.setOnClickListener{
+                findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
+            }
         }
     }
 
