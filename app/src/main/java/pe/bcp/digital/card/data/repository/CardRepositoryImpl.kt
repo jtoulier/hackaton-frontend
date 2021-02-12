@@ -3,6 +3,7 @@ package pe.bcp.digital.card.data.repository
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import io.ktor.http.*
 import pe.bcp.digital.card.data.model.Summary
 import pe.bcp.digital.card.data.model.UserSession
 import pe.bcp.digital.card.data.network.HttpConstants
@@ -14,8 +15,7 @@ class CardRepositoryImpl(private val httpClient: HttpClient, private val session
 
     override suspend fun getSummary(): Result<Summary>{
         return try {
-            val response = httpClient.get<Summary>(path = "S${HttpConstants.SUMMARY}${session.user!!.document}"){
-            }
+            val response = httpClient.get<Summary>(path = "${HttpConstants.SUMMARY}/${session.user!!.document}")
             Result.Success(response)
         }catch (t: Throwable){
             Result.Error(Exception("Error"))
@@ -25,7 +25,8 @@ class CardRepositoryImpl(private val httpClient: HttpClient, private val session
 
     override suspend fun addCard(amount: Int, expirationDate: String): Result<Unit> {
         return try {
-            val response = httpClient.get<HttpResponse>(path = HttpConstants.REGISTER_CARD){
+            val response = httpClient.post<HttpResponse>(path = HttpConstants.REGISTER_CARD){
+                contentType(ContentType.Application.Json)
                 body = RegisterCardRequest(session.user!!.document, amount, expirationDate)
             }
 

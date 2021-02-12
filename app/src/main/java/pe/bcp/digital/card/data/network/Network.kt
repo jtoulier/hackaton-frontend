@@ -13,9 +13,10 @@ object Network{
 
     val client = HttpClient(OkHttp) {
         defaultRequest {
-            host = "35.192.80.171"
+            host = "70.37.86.87"
             url {
                 protocol = URLProtocol.HTTP
+                port = 8081
             }
         }
 
